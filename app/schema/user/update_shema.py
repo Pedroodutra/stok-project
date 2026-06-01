@@ -6,6 +6,22 @@ class UserUpdate(BaseModel):
     email: EmailStr 
     password: str = Field(min_length=6)
 
+# Validação de dados para atualização de usuário 
+class UserUpdateName(BaseModel):
+    name: str
+    password: str = Field(min_length=6)
+
+# Validação de dados para atualização de usuário 
+class UserUpdateEmail(BaseModel):
+    email: EmailStr 
+    password: str = Field(min_length=6)
+
+# Validação de dados para atualização de usuário 
+class UserUpdatePassword(BaseModel):
+    password: str = Field(min_length=6)
+    new_password: str = Field(min_length=6)
+
+
 # Validação de dados para respostas
 class UserResponse(BaseModel):
     id: int

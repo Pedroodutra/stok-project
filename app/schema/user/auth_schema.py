@@ -3,15 +3,15 @@ from pydantic import BaseModel, EmailStr, Field
 # Validação de dados para autenticação de usuário request
 
 class UserAuthenticate(BaseModel):
-    email: EmailStr
+    username: EmailStr
     password: str = Field(min_length=6)
     @classmethod
     def as_form(
         cls,
-        email: str = Form(""),
-        password: str = Form("")
+        username: EmailStr = Form(...),
+        password: str = Form(...)
     ):
         return cls(
-            email=email,
+            username=username,
             password=password
         )

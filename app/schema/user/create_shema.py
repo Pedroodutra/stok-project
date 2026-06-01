@@ -9,9 +9,9 @@ class UserCreate(BaseModel):
     @classmethod
     def as_form(
         cls,
-        name: str = Form(""),
-        email: str = Form(""),
-        password: str = Form("")
+        name: str = Form(...),
+        email: str = Form(...),
+        password: str = Form(...)
     ):
         return cls(
             name=name,

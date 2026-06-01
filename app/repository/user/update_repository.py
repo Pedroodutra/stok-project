@@ -1,24 +1,49 @@
 from app.models.user_model import User
-def update_user(
-        session, 
-        user_id: int,       
-        name: str, 
-        email: str, 
-        hashed_password: str,
-        is_admin: bool = False,
-        group_id: int = 2
+from app.repository.user.read_repository import get_user_by_id
+
+# Função atualizar o nome de um usuário existente no banco de dados
+def update_user_name(
+        session,
+        user_id,
+        name                
     ):
-    user = session.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise ValueError("User not found")
-
+    user = get_user_by_id(session, user_id)
+   
+    
     user.name = name
-    user.email = email
-    user.password = hashed_password
-    user.is_admin = is_admin
-    user.group_id = group_id
-
-    session.add(user)
     session.commit()
     session.refresh(user)
+    
+    return user
+
+# Função atualizar o email de um usuário existente no banco de dados
+def update_user_email(
+        session,
+        user_id,
+        email
+    ):
+    user = get_user_by_id(session, user_id)
+    if not user:
+        return None
+    
+    user.email = email
+    session.commit()
+    session.refresh(user)
+    
+    return user
+
+# Função atualizar o password de um usuário existente no banco de dados
+def update_password(
+        session,
+        user_id,
+        password_hash   
+    ):
+    user = get_user_by_id(session, user_id)
+    if not user:
+        return None
+    
+    user.password_hash = password_hash
+    session.commit()
+    session.refresh(user)
+    
     return user

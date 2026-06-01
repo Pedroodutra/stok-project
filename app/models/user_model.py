@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Integer, String, DateTime
+from sqlalchemy import Integer, String, DateTime, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
 from app.database.database import Base
 
@@ -24,11 +24,33 @@ class User(Base):
     password: Mapped[str] = mapped_column(
         String(255), 
         nullable=False
-        ) 
+        )
+    created_by: Mapped[str] = mapped_column(
+        String(255),
+        nullable=True
+        )
     date_created: Mapped[datetime] = mapped_column(
         DateTime, 
         default=datetime.utcnow
         )
+    updated_by: Mapped[str] = mapped_column(
+        String(255),
+        nullable=True
+        )
+    date_updated: Mapped[datetime] = mapped_column(
+        DateTime,
+        default=datetime.utcnow
+        )
+    action_updated: Mapped[str] = mapped_column(
+        String(255),
+        nullable=True
+    )
+    is_active = mapped_column(
+        Boolean,
+        default=True,
+        nullable=False
+    )
+
     is_admin: Mapped[bool] = mapped_column(
         default=False
     )
