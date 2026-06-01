@@ -12,12 +12,12 @@ SessionLocal = sessionmaker(bind=engine)
 class Base(DeclarativeBase):
     pass
 # 4. Função para obter a sessão do banco de dados (gerenciamento de conexões) a cada requisição e fechamento após o uso
-def get_db():
+def get_session():
 
-    db = SessionLocal()
+    session = SessionLocal()
 
     try:
-        yield db
+        yield session   
 
     finally:
-        db.close()
+        session.close()

@@ -1,11 +1,9 @@
 from app.repository.user.create_repository import create_user
-from app.utils.validations.val_user import validate_user_exists
 from app.utils.validations.val_email import validate_email_not_registered
 from app.utils.security.hash_psw import hash_password
 from app.schema.user.create_shema import UserCreate
 from app.repository.helper.auditoria import auditoria_user_create
-from app.service.auth.current_user import get_current_user
-from fastapi import Depends
+
 from fastapi import HTTPException
 
 # Função de serviço para criar um novo usuário

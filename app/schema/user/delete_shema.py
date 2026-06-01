@@ -11,3 +11,8 @@ class UserDelete(BaseModel):
         return cls(
             id=id,
         )
+class UserDeleteResponse(BaseModel):
+    id: int
+    name: str
+    email: EmailStr
+    is_active: bool

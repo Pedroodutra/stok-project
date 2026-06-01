@@ -2,25 +2,28 @@ from app.database.database import SessionLocal
 from app.models.user_model import User
 from app.utils.security.hash_psw import hash_password
 
-db = SessionLocal()
+session = SessionLocal()
 
 try:
-    admin = db.query(User).filter(
+    admin = session.query(User).filter(
         User.email == "admin@email.com"
     ).first()
 
     if not admin:
-        db.add(
+        session.add(
             User(
                 name="admin",
                 email="admin@email.com",
                 password=hash_password("123456"),
+                created_by="admin@email.com",
+                updated_by="admin@email.com",
+                action_updated="create",
                 is_admin=True,
                 group_id=1
             )
         )
-        db.commit()
+        session.commit()
         print("Usuário admin criado com sucesso!")
 
 finally:
-    db.close()
+    session.close()
